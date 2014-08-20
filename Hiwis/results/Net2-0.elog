@@ -1,0 +1,5 @@
+E # 0 t 0 m 1 ce -1 msg -1
+SB v 1028 rid Net2-0-20140807-09:42:10-3170 b 1000
+KF p -1 c "" s ""
+MC id 1 c cCompoundModule t de.tudarmstadt.maki.simonstrator.util.core.Net2 n Net2 cm 1
+MS id 1 d ""

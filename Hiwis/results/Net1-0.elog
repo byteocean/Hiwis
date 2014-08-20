@@ -1,0 +1,21 @@
+E # 0 t 0 m 1 ce -1 msg -1
+SB v 1028 rid Net1-0-20140820-02:18:27-1963 b 1000
+KF p -1 c "" s ""
+MC id 1 c cCompoundModule t de.tudarmstadt.maki.simonstrator.util.core.Net1 n Net1 cm 1
+MS id 1 d ""
+MC id 2 c JSimpleModule t de.tudarmstadt.maki.simonstrator.util.core.RealtimeScheduler pid 1 n tic
+GC m 2 g 0 n in o 0
+GC m 2 g 3 n out o 1
+MS id 2 d i=misc/node
+MC id 3 c JSimpleModule t de.tudarmstadt.maki.simonstrator.util.core.Start pid 1 n toc
+GC m 3 g 0 n in o 0
+GC m 3 g 3 n out o 1
+MS id 3 d i=misc/node
+CC sm 2 sg 3 dm 2 dg 0
+CC sm 3 sg 3 dm 3 dg 0
+CM id 0 tid 0 eid 0 etid 0 c cMessage n timeout pe -1
+MB sm 1 tm 2 m initialize(0)
+ME
+MB sm 1 tm 3 m initialize(0)
+CM id 1 tid 1 eid 1 etid 1 c cMessage n timeout pe -1
+CM id 2 tid 2 eid 2 etid 2 c cMessage n timeout pe -1
