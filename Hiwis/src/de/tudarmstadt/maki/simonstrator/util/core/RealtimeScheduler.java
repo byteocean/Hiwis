@@ -120,7 +120,8 @@ public class RealtimeScheduler extends JSimpleModule implements SchedulerCompone
     	}
     	else
     	{
-    		scheduleIn(1000,null,null,0);
+    		
+    		scheduleIn(message.time,message.event,message.cnt,message.type);
     	}
     }
     @Override

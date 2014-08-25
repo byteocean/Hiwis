@@ -4,6 +4,8 @@ import org.omnetpp.simkernel.JSimpleModule;
 import org.omnetpp.simkernel.Simkernel;
 import org.omnetpp.simkernel.cModule;
 
+import de.tudarmstadt.maki.simonstrator.api.EventHandler;
+
 public class Start extends JSimpleModule {
 
 	public Start() {
@@ -14,6 +16,7 @@ public class Start extends JSimpleModule {
 		//RealtimeScheduler task = new RealtimeScheduler();
 		System.out.println("Start initialized. Calling schedule in");
 		//task.scheduleIn(100000, null, null, 0);
+		//EventHandler handle = new EventHandler();
 		TimeoutMsg timeout = new TimeoutMsg("timeout");
 		send(timeout,"out");
 	}
