@@ -38,7 +38,8 @@ public class RealtimeScheduler extends JSimpleModule implements SchedulerCompone
     
     protected HashMap<Long,ArrayList<SchedulerTask>> Handler;
     
-    
+    private TimeoutMsg timeoutmsg;
+    private long scale;
 
 	/**
 	 * 
@@ -52,8 +53,8 @@ public class RealtimeScheduler extends JSimpleModule implements SchedulerCompone
 						return new Thread(r, "Scheduler-Thread");
 					}
 				});
-		event = new cMessage("timeout");
-        Handler = new HashMap<Long,ArrayList<SchedulerTask>>();
+		
+        //scheduleIn(1000,null,null,0);
 	}
 
     @SuppressWarnings("static-access")
@@ -66,49 +67,85 @@ public class RealtimeScheduler extends JSimpleModule implements SchedulerCompone
         startTimestampMicrosecond = simTime().getBaseCPtr();
 		// timer = new Timer("RealtimeCoreTimer");
         initialized = true;
-        
-        
-        
+        event = new cMessage("timeout");
+		
+        Handler = new HashMap<Long,ArrayList<SchedulerTask>>();
+        System.out.println("Time Scale "+simTime().getScaleExp());
+        scale = simTime().getScaleExp() * (-1);
     }
     
 	protected void handleMessage(cMessage msg){
-    	if(msg.sameAs(event)){
-    		long time = simTime().getBaseCPtr();
+		TimeoutMsg message = (TimeoutMsg) JMessage.cast(msg);
+		System.out.println("handleMessage called");
+    	if(message.isSelfMessage()){
+    		
+    		System.out.println("Timeout message arrived");
+    		long time = simTime().raw();
+    		System.out.println("Current time is "+time);
+			
+			//System.out.println("Current scale is "+(10 ^ scale));
+			time = (long) (time / (Math.pow(10,scale)));
+    		System.out.println("Current time is "+time);
     		Iterator<Entry<Long, ArrayList<SchedulerTask>>> it = Handler.entrySet().iterator();
     		while(it.hasNext()){
     			Map.Entry<Long, ArrayList<SchedulerTask> > pairs = (Map.Entry<Long, ArrayList<SchedulerTask>>) it.next();
+    			System.out.println("Stored time "+pairs.getKey());
     			if(pairs.getKey() <= time){
     				if(pairs.getValue().size() != 1){
-    					pairs.getValue().get(0).handler.eventOccurred(pairs.getValue().get(0).content, pairs.getValue().get(0).type);
-    					pairs.getValue().remove(0);
+    					if(pairs.getValue().get(0).handler != null)
+    					{
+    						pairs.getValue().get(0).handler.eventOccurred(pairs.getValue().get(0).content, pairs.getValue().get(0).type);
+    						pairs.getValue().remove(0);
+    					}
+    					else
+    					{
+    						System.out.println("Handler is null");
+    					}
     				}
     				else
     				{
-    					pairs.getValue().get(0).handler.eventOccurred(pairs.getValue().get(0).content, pairs.getValue().get(0).type);
-    					Handler.remove(pairs.getKey());
+    					if(pairs.getValue().get(0).handler != null)
+    					{
+
+    						pairs.getValue().get(0).handler.eventOccurred(pairs.getValue().get(0).content, pairs.getValue().get(0).type);
+    						Handler.remove(pairs.getKey());
+    					}
+    					else
+    					{
+    						System.out.println("Handler is null");
+    					}
     				}
     			}
     		}
+    	}
+    	else
+    	{
+    		scheduleIn(1000,null,null,0);
     	}
     }
     @Override
     public void scheduleIn(long time, EventHandler handler, Object content, int type) {
     	System.out.println("scheduleIn Called");
         SchedulerTask task = new SchedulerTask(handler, content, type);
-        if(Handler.containsKey(simTime().getBaseCPtr() + time)){
-        	Handler.get(simTime().getBaseCPtr() + time).add(task);
+        
+        if(Handler.containsKey((long) (simTime().raw() / (Math.pow(10,scale))) + time)){
+        	Handler.get((long) (simTime().raw() / (Math.pow(10,scale))) + time).add(task);
         }
         else
         {
+        	System.out.println("Adding to the list");
         	ArrayList<SchedulerTask> task1 = new ArrayList<SchedulerTask>();
         	task1.add(task);
-        	Handler.put(simTime().getBaseCPtr() + time, task1);
+        	System.out.println("Current time "+simTime().raw());
+        	Handler.put((long) (simTime().raw() / (Math.pow(10,scale))) + time, task1);
+        	
         }
 		//scheduler.schedule(task, time, TimeUnit.MICROSECONDS);
-        TimeoutMsg timeoutmsg = new TimeoutMsg("timeout");
+        timeoutmsg = new TimeoutMsg("timeout");
         //timeoutmsg.setTimestamp();
         //scheduleAt(simTime().add(new SimTime(time)),timeoutmsg);
-        scheduleAt(simTime().add(new SimTime(time)), timeoutmsg);
+        System.out.println("Schedule At");
+        scheduleAt(simTime().add(time), timeoutmsg);
     }
 
     

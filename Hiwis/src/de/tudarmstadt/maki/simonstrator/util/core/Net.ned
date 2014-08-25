@@ -24,7 +24,8 @@ network Net1
         tic: RealtimeScheduler;
         toc: Start;
     connections:
-        tic.out --> tic.in;
-        toc.out --> toc.in;
+        toc.out --> tic.in;
+        tic.out --> toc.in;
+        //toc.out --> toc.in;
         
 }
