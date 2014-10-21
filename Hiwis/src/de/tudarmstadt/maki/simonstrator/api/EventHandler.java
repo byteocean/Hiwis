@@ -37,4 +37,5 @@ public interface EventHandler {
 	 * @param content
 	 */
 	public void eventOccurred(Object content, int type);
+//	public void eventOccurred();
 }

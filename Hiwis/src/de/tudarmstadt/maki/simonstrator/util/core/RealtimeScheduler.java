@@ -72,10 +72,13 @@ public class RealtimeScheduler extends JSimpleModule implements SchedulerCompone
         Handler = new HashMap<Long,ArrayList<SchedulerTask>>();
         System.out.println("Time Scale "+simTime().getScaleExp());
         scale = simTime().getScaleExp() * (-1);
+        
     }
     
 	protected void handleMessage(cMessage msg){
-		TimeoutMsg message = (TimeoutMsg) JMessage.cast(msg);
+		//TimeoutMsg message = (TimeoutMsg)JMessage.cast(msg);
+		
+		TimeoutMsg message = TimeoutMsg.cast(msg);
 		System.out.println("handleMessage called");
     	if(message.isSelfMessage()){
     		
@@ -120,10 +123,12 @@ public class RealtimeScheduler extends JSimpleModule implements SchedulerCompone
     	}
     	else
     	{
-    		
-    		scheduleIn(message.time,message.event,message.cnt,message.type);
+    		scheduleIn(1000,message.eventHandler,null,0);
+    		System.out.println(message.type);
+    		message.eventHandler.eventOccurred(null, 0);
     	}
     }
+	
     @Override
     public void scheduleIn(long time, EventHandler handler, Object content, int type) {
     	System.out.println("scheduleIn Called");
