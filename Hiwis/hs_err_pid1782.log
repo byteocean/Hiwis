@@ -1,0 +1,499 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  SIGSEGV (0xb) at pc=0x005334c6, pid=1782, tid=3078522576
+#
+# JRE version: 6.0_31-b31
+# Java VM: OpenJDK Client VM (23.25-b01 mixed mode, sharing linux-x86 )
+# Problematic frame:
+# C  [liboppsimd.so+0x1674c6]  cSimpleModule::scheduleAt(SimTime, cMessage*)+0x17a
+#
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+# If you would like to submit a bug report, please include
+# instructions how to reproduce the bug and visit:
+#   https://bugs.launchpad.net/ubuntu/+source/openjdk-6/
+# The crash happened outside the Java Virtual Machine in native code.
+# See problematic frame for where to report the bug.
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0aaf6400):  JavaThread "main" [_thread_in_native, id=1782, stack(0xbfdbd000,0xbfe0d000)]
+
+siginfo:si_signo=SIGSEGV: si_errno=0, si_code=1 (SEGV_MAPERR), si_addr=0x00000000
+
+Registers:
+EAX=0x00000000, EBX=0x00000000, ECX=0xa4c68000, EDX=0x080da11a
+ESP=0xbfe092b0, EBP=0xbfe09328, ESI=0x8fa2bab0, EDI=0x0aaf6400
+EIP=0x005334c6, EFLAGS=0x00010202, CR2=0x00000000
+
+Top of Stack: (sp=0xbfe092b0)
+0xbfe092b0:   09bf40e8 bfe092f4 00407c7c b77febf0
+0xbfe092c0:   00000000 ffffffff 00bbaff4 080687e0
+0xbfe092d0:   00000005 bfe09310 00bac6b6 00bbbab0
+0xbfe092e0:   00000000 00000001 00000005 00000000
+0xbfe092f0:   00000005 00000000 00000000 00000000
+0xbfe09300:   00407c7c 8fa2bab0 8fa2bab0 0aaf6400
+0xbfe09310:   bfe09398 00bb23c0 00038d7e 8fa2bab0
+0xbfe09320:   8fa2bab0 0aaf6400 bfe09398 0809e31b 
+
+Instructions: (pc=0x005334c6)
+0x005334a6:   e8 67 3b 00 00 85 c0 74 07 b8 01 00 00 00 eb 05
+0x005334b6:   b8 00 00 00 00 84 c0 0f 84 6c 01 00 00 8b 45 08
+0x005334c6:   8b 00 83 c0 14 8b 10 8b 45 08 89 04 24 ff d2 89
+0x005334d6:   c6 8b 45 08 8b 00 83 c0 20 8b 08 8b 55 08 8d 45 
+
+Register to memory mapping:
+
+EAX=0x00000000 is an unknown value
+EBX=0x00000000 is an unknown value
+ECX=0xa4c68000 is an unknown value
+EDX=0x080da11a: _ZNK7cModule8isModuleEv+0 in /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/contrib/jsimplemodule/jsimple/jsimple at 0x08048000
+ESP=0xbfe092b0 is pointing into the stack for thread: 0x0aaf6400
+EBP=0xbfe09328 is pointing into the stack for thread: 0x0aaf6400
+ESI=0x8fa2bab0 is an oop
+{method} 
+ - klass: {other class}
+EDI=0x0aaf6400 is a thread
+
+
+Stack: [0xbfdbd000,0xbfe0d000],  sp=0xbfe092b0,  free space=304k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+C  [liboppsimd.so+0x1674c6]  cSimpleModule::scheduleAt(SimTime, cMessage*)+0x17a
+C  [jsimple+0x5631b]  Java_org_omnetpp_simkernel_SimkernelJNI_cSimpleModule_1scheduleAt+0xcc
+j  org.omnetpp.simkernel.SimkernelJNI.cSimpleModule_scheduleAt(JLorg/omnetpp/simkernel/cSimpleModule;JLorg/omnetpp/simkernel/SimTime;JLorg/omnetpp/simkernel/cMessage;)I+0
+j  org.omnetpp.simkernel.cSimpleModule.scheduleAt(Lorg/omnetpp/simkernel/SimTime;Lorg/omnetpp/simkernel/cMessage;)I+15
+j  de.tudarmstadt.maki.simonstrator.util.core.RealtimeScheduler.scheduleIn(JLde/tudarmstadt/maki/simonstrator/api/EventHandler;Ljava/lang/Object;I)V+150
+j  de.tudarmstadt.maki.simonstrator.util.core.RealtimeScheduler.<init>()V+55
+v  ~StubRoutines::call_stub
+V  [libjvm.so+0x26dd84]  JavaCalls::call_helper(JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x314
+V  [libjvm.so+0x397799]  os::os_exception_wrapper(void (*)(JavaValue*, methodHandle*, JavaCallArguments*, Thread*), JavaValue*, methodHandle*, JavaCallArguments*, Thread*)+0x19
+V  [libjvm.so+0x26c9bf]  JavaCalls::call(JavaValue*, methodHandle, JavaCallArguments*, Thread*)+0x2f
+V  [libjvm.so+0x279f2c]  jni_invoke_nonstatic(JNIEnv_*, JavaValue*, _jobject*, JNICallType, _jmethodID*, JNI_ArgumentPusher*, Thread*)+0x27c
+V  [libjvm.so+0x287ed5]  jni_NewObjectV+0x1c5
+C  [jsimple+0x88be5]  JNIEnv_::NewObject(_jclass*, _jmethodID*, ...)+0x31
+C  [jsimple+0x91e33]  JSimpleModule::createJavaModuleObject()+0x219
+C  [jsimple+0x91b8e]  JSimpleModule::numInitStages() const+0x1e
+C  [liboppsimd.so+0x1495d4]  cModule::initializeModules(int)+0x118
+C  [liboppsimd.so+0x14977b]  cModule::initializeModules(int)+0x2bf
+C  [liboppsimd.so+0x149261]  cModule::callInitialize()+0x71
+C  [liboppsimd.so+0x16a43c]  cSimulation::startRun()+0xd6
+C  [liboppenvird.so+0x911c3]  EnvirBase::startRun()+0x97
+C  [libopptkenvd.so+0x34abb]  Tkenv::newRun(char const*, int)+0x1bb
+C  [libopptkenvd.so+0x3f3b1]  newRun_cmd(void*, Tcl_Interp*, int, char const**)+0x72
+C  [libtcl8.4.so.0+0x1f17e]  TclInvokeStringCommand+0x6e
+C  [libtcl8.4.so.0+0x205bb]  TclEvalObjvInternal+0x35b
+C  [libtcl8.4.so.0+0x4d2c2]  TclCompEvalObj+0x2782
+C  [libtcl8.4.so.0+0x4ac1d]  TclCompEvalObj+0xdd
+C  [libtcl8.4.so.0+0x81957]  TclObjInterpProc+0x2a7
+C  [libtcl8.4.so.0+0x205bb]  TclEvalObjvInternal+0x35b
+C  [libtcl8.4.so.0+0x4d2c2]  TclCompEvalObj+0x2782
+C  [libtcl8.4.so.0+0x4ac1d]  TclCompEvalObj+0xdd
+C  [libtcl8.4.so.0+0x81957]  TclObjInterpProc+0x2a7
+C  [libtcl8.4.so.0+0x205bb]  TclEvalObjvInternal+0x35b
+C  [libtcl8.4.so.0+0x2144c]  Tcl_EvalEx+0x4fc
+C  [libtcl8.4.so.0+0x216dc]  Tcl_Eval+0x3c
+C  [libopptkenvd.so+0x33224]  Tkenv::run()+0x75e
+C  [liboppenvird.so+0x8d70d]  EnvirBase::run(int, char**, cConfiguration*)+0x1a5
+C  [liboppenvird.so+0x8a66a]  setupUserInterface(int, char**)+0xb82
+C  [liboppenvird.so+0x8b1dd]  evMain+0x49
+C  [jsimple+0x93b2f]  main+0x1b
+C  [libc.so.6+0x16bd6]  __libc_start_main+0xe6
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  org.omnetpp.simkernel.SimkernelJNI.cSimpleModule_scheduleAt(JLorg/omnetpp/simkernel/cSimpleModule;JLorg/omnetpp/simkernel/SimTime;JLorg/omnetpp/simkernel/cMessage;)I+0
+j  org.omnetpp.simkernel.cSimpleModule.scheduleAt(Lorg/omnetpp/simkernel/SimTime;Lorg/omnetpp/simkernel/cMessage;)I+15
+j  de.tudarmstadt.maki.simonstrator.util.core.RealtimeScheduler.scheduleIn(JLde/tudarmstadt/maki/simonstrator/api/EventHandler;Ljava/lang/Object;I)V+150
+j  de.tudarmstadt.maki.simonstrator.util.core.RealtimeScheduler.<init>()V+55
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x0ab66000 JavaThread "Low Memory Detector" daemon [_thread_blocked, id=1793, stack(0xb3e12000,0xb3e63000)]
+  0x0ab64000 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=1792, stack(0xb3e63000,0xb3ee4000)]
+  0x0ab62800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=1791, stack(0xb3ee4000,0xb3f35000)]
+  0x0ab5bc00 JavaThread "Finalizer" daemon [_thread_blocked, id=1790, stack(0xb3f35000,0xb3f86000)]
+  0x0ab5a000 JavaThread "Reference Handler" daemon [_thread_blocked, id=1789, stack(0xb3f86000,0xb3fd7000)]
+=>0x0aaf6400 JavaThread "main" [_thread_in_native, id=1782, stack(0xbfdbd000,0xbfe0d000)]
+
+Other Threads:
+  0x0ab50400 VMThread [stack: 0xb3fd7000,0xb4058000] [id=1788]
+  0x0ab69000 WatcherThread [stack: 0xb3d91000,0xb3e12000] [id=1794]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap
+ def new generation   total 4928K, used 992K [0x6fa10000, 0x6ff60000, 0x7a4b0000)
+  eden space 4416K,  22% used [0x6fa10000, 0x6fb082a8, 0x6fe60000)
+  from space 512K,   0% used [0x6fe60000, 0x6fe60000, 0x6fee0000)
+  to   space 512K,   0% used [0x6fee0000, 0x6fee0000, 0x6ff60000)
+ tenured generation   total 10944K, used 0K [0x7a4b0000, 0x7af60000, 0x8fa10000)
+   the space 10944K,   0% used [0x7a4b0000, 0x7a4b0000, 0x7a4b0200, 0x7af60000)
+ compacting perm gen  total 12288K, used 491K [0x8fa10000, 0x90610000, 0x93a10000)
+   the space 12288K,   3% used [0x8fa10000, 0x8fa8ada0, 0x8fa8ae00, 0x90610000)
+    ro space 10240K,  56% used [0x93a10000, 0x93fad218, 0x93fad400, 0x94410000)
+    rw space 12288K,  60% used [0x94410000, 0x94b5c138, 0x94b5c200, 0x95010000)
+
+Card table byte_map: [0xb42bb000,0xb43e7000] byte_map_base: 0xb3f3df80
+
+Polling page: 0xb77f4000
+
+Code Cache  [0xb43e7000, 0xb4487000, 0xb63e7000)
+ total_blobs=181 nmethods=14 adapters=104 free_code_cache=32130Kb largest_free_block=32901312
+
+Compilation events (10 events):
+Event: 0.777 Thread 0x0ab64000   10             java.lang.String::lastIndexOf (156 bytes)
+Event: 0.777 Thread 0x0ab64000 nmethod 10 0xb4483a48 code [0xb4483b70, 0xb4483d7c]
+Event: 0.779 Thread 0x0ab64000   11             java.io.UnixFileSystem::normalize (75 bytes)
+Event: 0.780 Thread 0x0ab64000 nmethod 11 0xb4484048 code [0xb4484180, 0xb4484340]
+Event: 0.792 Thread 0x0ab64000   12             java.lang.String::indexOf (166 bytes)
+Event: 0.793 Thread 0x0ab64000 nmethod 12 0xb4484588 code [0xb44846a0, 0xb44848d0]
+Event: 0.820 Thread 0x0ab64000   13             java.lang.String::replace (142 bytes)
+Event: 0.828 Thread 0x0ab64000 nmethod 13 0xb4484bc8 code [0xb4484cf0, 0xb4484fa0]
+Event: 0.926 Thread 0x0ab64000   14             sun.net.www.ParseUtil::encodePath (336 bytes)
+Event: 0.929 Thread 0x0ab64000 nmethod 14 0xb4485988 code [0xb4485b40, 0xb4486184]
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 0.872 Thread 0x0aaf6400 Threw 0x6fae7978 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/classfile/systemDictionary.cpp:179
+Event: 0.872 Thread 0x0aaf6400 Threw 0x6fae7cb0 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/prims/jvm.cpp:1235
+Event: 0.876 Thread 0x0aaf6400 Threw 0x6faeac90 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/classfile/systemDictionary.cpp:179
+Event: 0.877 Thread 0x0aaf6400 Threw 0x6faeaf98 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/prims/jvm.cpp:1235
+Event: 0.879 Thread 0x0aaf6400 Threw 0x6faef100 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/classfile/systemDictionary.cpp:179
+Event: 0.879 Thread 0x0aaf6400 Threw 0x6faef490 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/prims/jvm.cpp:1235
+Event: 0.926 Thread 0x0aaf6400 Threw 0x6faf4270 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/classfile/systemDictionary.cpp:179
+Event: 0.926 Thread 0x0aaf6400 Threw 0x6faf4630 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/prims/jvm.cpp:1235
+Event: 0.930 Thread 0x0aaf6400 Threw 0x6faf6a90 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/classfile/systemDictionary.cpp:179
+Event: 0.930 Thread 0x0aaf6400 Threw 0x6faf6da0 at /build/buildd/openjdk-6-6b31-1.13.3/build/openjdk/hotspot/src/share/vm/prims/jvm.cpp:1235
+
+Events (10 events):
+Event: 0.909 loading class 0x95180930
+Event: 0.911 loading class 0xb3c232b0
+Event: 0.911 loading class 0xb3c232b0 done
+Event: 0.911 loading class 0x95180930 done
+Event: 0.913 loading class 0xb3c23218
+Event: 0.918 loading class 0xb3c23218 done
+Event: 0.926 loading class 0xb3c19f20
+Event: 0.926 loading class 0xb3c19f20 done
+Event: 0.930 loading class 0xb3c19e10
+Event: 0.930 loading class 0xb3c19e10 done
+
+
+Dynamic libraries:
+00110000-0011f000 r-xp 00000000 08:01 459388     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppcmdenvd.so
+0011f000-00120000 r--p 0000e000 08:01 459388     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppcmdenvd.so
+00120000-00121000 rw-p 0000f000 08:01 459388     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppcmdenvd.so
+00121000-00123000 r-xp 00000000 08:01 137704     /lib/tls/i686/cmov/libdl-2.11.1.so
+00123000-00124000 r--p 00001000 08:01 137704     /lib/tls/i686/cmov/libdl-2.11.1.so
+00124000-00125000 rw-p 00002000 08:01 137704     /lib/tls/i686/cmov/libdl-2.11.1.so
+00125000-00149000 r-xp 00000000 08:01 137706     /lib/tls/i686/cmov/libm-2.11.1.so
+00149000-0014a000 r--p 00023000 08:01 137706     /lib/tls/i686/cmov/libm-2.11.1.so
+0014a000-0014b000 rw-p 00024000 08:01 137706     /lib/tls/i686/cmov/libm-2.11.1.so
+0014b000-0014d000 r-xp 00000000 08:01 264758     /usr/lib/libXau.so.6.0.0
+0014d000-0014e000 r--p 00001000 08:01 264758     /usr/lib/libXau.so.6.0.0
+0014e000-0014f000 rw-p 00002000 08:01 264758     /usr/lib/libXau.so.6.0.0
+0014f000-00153000 r-xp 00000000 08:01 264769     /usr/lib/libXdmcp.so.6.0.0
+00153000-00154000 r--p 00003000 08:01 264769     /usr/lib/libXdmcp.so.6.0.0
+00154000-00155000 rw-p 00004000 08:01 264769     /usr/lib/libXdmcp.so.6.0.0
+00155000-00159000 r-xp 00000000 08:01 264773     /usr/lib/libXfixes.so.3.1.0
+00159000-0015a000 r--p 00003000 08:01 264773     /usr/lib/libXfixes.so.3.1.0
+0015a000-0015b000 rw-p 00004000 08:01 264773     /usr/lib/libXfixes.so.3.1.0
+0015c000-001cf000 r-xp 00000000 08:01 459406     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/libopptkenvd.so
+001cf000-001d0000 r--p 00072000 08:01 459406     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/libopptkenvd.so
+001d0000-0024c000 rw-p 00073000 08:01 459406     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/libopptkenvd.so
+0024c000-00361000 r-xp 00000000 08:01 459383     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppenvird.so
+00361000-00362000 r--p 00114000 08:01 459383     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppenvird.so
+00362000-00363000 rw-p 00115000 08:01 459383     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppenvird.so
+00363000-003ca000 r-xp 00000000 08:01 459135     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/libopplayoutd.so
+003ca000-003cb000 r--p 00066000 08:01 459135     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/libopplayoutd.so
+003cb000-003cc000 rw-p 00067000 08:01 459135     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/libopplayoutd.so
+003cc000-00624000 r-xp 00000000 08:01 459348     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppsimd.so
+00624000-00625000 r--p 00257000 08:01 459348     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppsimd.so
+00625000-00626000 rw-p 00258000 08:01 459348     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppsimd.so
+00626000-00629000 rw-p 00000000 00:00 0 
+00629000-00712000 r-xp 00000000 08:01 269643     /usr/lib/libstdc++.so.6.0.13
+00712000-00716000 r--p 000e9000 08:01 269643     /usr/lib/libstdc++.so.6.0.13
+00716000-00717000 rw-p 000ed000 08:01 269643     /usr/lib/libstdc++.so.6.0.13
+00717000-0071e000 rw-p 00000000 00:00 0 
+0071e000-0076c000 r-xp 00000000 08:01 459121     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppcommond.so
+0076c000-0076d000 r--p 0004d000 08:01 459121     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppcommond.so
+0076d000-0076e000 rw-p 0004e000 08:01 459121     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppcommond.so
+0076e000-00781000 r-xp 00000000 08:01 133475     /lib/libz.so.1.2.3.3
+00781000-00782000 r--p 00012000 08:01 133475     /lib/libz.so.1.2.3.3
+00782000-00783000 rw-p 00013000 08:01 133475     /lib/libz.so.1.2.3.3
+00783000-0079b000 r-xp 00000000 08:01 270050     /usr/lib/libxcb.so.1.1.0
+0079b000-0079c000 r--p 00017000 08:01 270050     /usr/lib/libxcb.so.1.1.0
+0079c000-0079d000 rw-p 00018000 08:01 270050     /usr/lib/libxcb.so.1.1.0
+0079d000-007b0000 r-xp 00000000 08:01 137709     /lib/tls/i686/cmov/libnsl-2.11.1.so
+007b0000-007b1000 r--p 00012000 08:01 137709     /lib/tls/i686/cmov/libnsl-2.11.1.so
+007b1000-007b2000 rw-p 00013000 08:01 137709     /lib/tls/i686/cmov/libnsl-2.11.1.so
+007b2000-007b4000 rw-p 00000000 00:00 0 
+007b4000-007bc000 r-xp 00000000 08:01 264765     /usr/lib/libXcursor.so.1.0.2
+007bc000-007bd000 r--p 00007000 08:01 264765     /usr/lib/libXcursor.so.1.0.2
+007bd000-007be000 rw-p 00008000 08:01 264765     /usr/lib/libXcursor.so.1.0.2
+007be000-007c6000 r-xp 00000000 08:01 296299     /usr/lib/libXrender.so.1.3.0
+007c6000-007c7000 r--p 00007000 08:01 296299     /usr/lib/libXrender.so.1.3.0
+007c7000-007c8000 rw-p 00008000 08:01 296299     /usr/lib/libXrender.so.1.3.0
+007c8000-007cf000 r-xp 00000000 08:01 137728     /lib/tls/i686/cmov/librt-2.11.1.so
+007cf000-007d0000 r--p 00006000 08:01 137728     /lib/tls/i686/cmov/librt-2.11.1.so
+007d0000-007d1000 rw-p 00007000 08:01 137728     /lib/tls/i686/cmov/librt-2.11.1.so
+007d1000-007dd000 r-xp 00000000 08:01 421609     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libverify.so
+007dd000-007de000 r--p 0000b000 08:01 421609     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libverify.so
+007de000-007df000 rw-p 0000c000 08:01 421609     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libverify.so
+007df000-007e5000 r-xp 00000000 08:01 137711     /lib/tls/i686/cmov/libnss_compat-2.11.1.so
+007e5000-007e6000 r--p 00006000 08:01 137711     /lib/tls/i686/cmov/libnss_compat-2.11.1.so
+007e6000-007e7000 rw-p 00007000 08:01 137711     /lib/tls/i686/cmov/libnss_compat-2.11.1.so
+007e7000-007ef000 r-xp 00000000 08:01 137719     /lib/tls/i686/cmov/libnss_nis-2.11.1.so
+007ef000-007f0000 r--p 00007000 08:01 137719     /lib/tls/i686/cmov/libnss_nis-2.11.1.so
+007f0000-007f1000 rw-p 00008000 08:01 137719     /lib/tls/i686/cmov/libnss_nis-2.11.1.so
+007f4000-007f5000 r-xp 00000000 00:00 0          [vdso]
+007f5000-00819000 r-xp 00000000 08:01 421578     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libjava.so
+00819000-0081a000 r--p 00023000 08:01 421578     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libjava.so
+0081a000-0081c000 rw-p 00024000 08:01 421578     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libjava.so
+0081c000-00826000 r-xp 00000000 08:01 137715     /lib/tls/i686/cmov/libnss_files-2.11.1.so
+00826000-00827000 r--p 00009000 08:01 137715     /lib/tls/i686/cmov/libnss_files-2.11.1.so
+00827000-00828000 rw-p 0000a000 08:01 137715     /lib/tls/i686/cmov/libnss_files-2.11.1.so
+00828000-0082f000 r-xp 00000000 08:01 421579     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libzip.so
+0082f000-00830000 r--p 00006000 08:01 421579     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libzip.so
+00830000-00831000 rw-p 00007000 08:01 421579     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/libzip.so
+0089e000-008bb000 r-xp 00000000 08:01 130877     /lib/libgcc_s.so.1
+008bb000-008bc000 r--p 0001c000 08:01 130877     /lib/libgcc_s.so.1
+008bc000-008bd000 rw-p 0001d000 08:01 130877     /lib/libgcc_s.so.1
+008bd000-00a10000 r-xp 00000000 08:01 137698     /lib/tls/i686/cmov/libc-2.11.1.so
+00a10000-00a11000 ---p 00153000 08:01 137698     /lib/tls/i686/cmov/libc-2.11.1.so
+00a11000-00a13000 r--p 00153000 08:01 137698     /lib/tls/i686/cmov/libc-2.11.1.so
+00a13000-00a14000 rw-p 00155000 08:01 137698     /lib/tls/i686/cmov/libc-2.11.1.so
+00a14000-00a17000 rw-p 00000000 00:00 0 
+00a17000-00ac7000 r-xp 00000000 08:01 265671     /usr/lib/libtcl8.4.so.0
+00ac7000-00ac8000 ---p 000b0000 08:01 265671     /usr/lib/libtcl8.4.so.0
+00ac8000-00ac9000 r--p 000b0000 08:01 265671     /usr/lib/libtcl8.4.so.0
+00ac9000-00ace000 rw-p 000b1000 08:01 265671     /usr/lib/libtcl8.4.so.0
+00ad1000-00ae6000 r-xp 00000000 08:01 137724     /lib/tls/i686/cmov/libpthread-2.11.1.so
+00ae6000-00ae7000 r--p 00014000 08:01 137724     /lib/tls/i686/cmov/libpthread-2.11.1.so
+00ae7000-00ae8000 rw-p 00015000 08:01 137724     /lib/tls/i686/cmov/libpthread-2.11.1.so
+00ae8000-00aea000 rw-p 00000000 00:00 0 
+00b9f000-00bba000 r-xp 00000000 08:01 133302     /lib/ld-2.11.1.so
+00bba000-00bbb000 r--p 0001a000 08:01 133302     /lib/ld-2.11.1.so
+00bbb000-00bbc000 rw-p 0001b000 08:01 133302     /lib/ld-2.11.1.so
+00bbc000-010ab000 r-xp 00000000 08:01 421586     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/client/libjvm.so
+010ab000-010c2000 r--p 004ef000 08:01 421586     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/client/libjvm.so
+010c2000-010d1000 rw-p 00506000 08:01 421586     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/client/libjvm.so
+010d1000-014ea000 rw-p 00000000 00:00 0 
+014ea000-015c8000 r-xp 00000000 08:01 273817     /usr/lib/libBLT.2.4.so.8.4
+015c8000-015c9000 r--p 000dd000 08:01 273817     /usr/lib/libBLT.2.4.so.8.4
+015c9000-015da000 rw-p 000de000 08:01 273817     /usr/lib/libBLT.2.4.so.8.4
+015da000-015db000 rw-p 00000000 00:00 0 
+035ac000-036ac000 r-xp 00000000 08:01 459226     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppnedxmld.so
+036ac000-036ad000 r--p 000ff000 08:01 459226     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppnedxmld.so
+036ad000-036ae000 rw-p 00100000 08:01 459226     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib/gcc/liboppnedxmld.so
+036ae000-036af000 rw-p 00000000 00:00 0 
+05396000-054af000 r-xp 00000000 08:01 270065     /usr/lib/libX11.so.6.3.0
+054af000-054b0000 r--p 00118000 08:01 270065     /usr/lib/libX11.so.6.3.0
+054b0000-054b2000 rw-p 00119000 08:01 270065     /usr/lib/libX11.so.6.3.0
+054b2000-054b3000 rw-p 00000000 00:00 0 
+05717000-057ec000 r-xp 00000000 08:01 265689     /usr/lib/libtk8.4.so.0
+057ec000-057ed000 r--p 000d4000 08:01 265689     /usr/lib/libtk8.4.so.0
+057ed000-057f8000 rw-p 000d5000 08:01 265689     /usr/lib/libtk8.4.so.0
+057f8000-057f9000 rw-p 00000000 00:00 0 
+07447000-0756b000 r-xp 00000000 08:01 273771     /usr/lib/libxml2.so.2.7.6
+0756b000-0756c000 ---p 00124000 08:01 273771     /usr/lib/libxml2.so.2.7.6
+0756c000-07570000 r--p 00124000 08:01 273771     /usr/lib/libxml2.so.2.7.6
+07570000-07571000 rw-p 00128000 08:01 273771     /usr/lib/libxml2.so.2.7.6
+07571000-07572000 rw-p 00000000 00:00 0 
+08048000-08111000 r-xp 00000000 08:01 474737     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/contrib/jsimplemodule/jsimple/out/gcc-debug/jsimple
+08111000-08112000 r--p 000c9000 08:01 474737     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/contrib/jsimplemodule/jsimple/out/gcc-debug/jsimple
+08112000-08117000 rw-p 000ca000 08:01 474737     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/contrib/jsimplemodule/jsimple/out/gcc-debug/jsimple
+08117000-08118000 rw-p 00000000 00:00 0 
+09bd6000-0abf6000 rw-p 00000000 00:00 0          [heap]
+6fa10000-6ff60000 rw-p 00000000 00:00 0 
+6ff60000-7a4b0000 rw-p 00000000 00:00 0 
+7a4b0000-7af60000 rw-p 00000000 00:00 0 
+7af60000-8fa10000 rw-p 00000000 00:00 0 
+8fa10000-90610000 rw-p 00000000 00:00 0 
+90610000-93a10000 rw-p 00000000 00:00 0 
+93a10000-93fae000 r--p 00001000 08:01 422236     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/client/classes.jsa
+93fae000-94410000 rw-p 00000000 00:00 0 
+94410000-94b5d000 rw-p 0059f000 08:01 422236     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/client/classes.jsa
+94b5d000-95010000 rw-p 00000000 00:00 0 
+95010000-9531f000 rw-p 00cec000 08:01 422236     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/client/classes.jsa
+9531f000-95410000 rw-p 00000000 00:00 0 
+95410000-95419000 r-xp 00ffb000 08:01 422236     /usr/lib/jvm/java-6-openjdk/jre/lib/i386/client/classes.jsa
+95419000-95810000 rw-p 00000000 00:00 0 
+b3b33000-b3c00000 rw-p 00000000 00:00 0 
+b3c00000-b3cb7000 rw-p 00000000 00:00 0 
+b3cb7000-b3d00000 ---p 00000000 00:00 0 
+b3d91000-b3d92000 ---p 00000000 00:00 0 
+b3d92000-b3e12000 rw-p 00000000 00:00 0 
+b3e12000-b3e15000 ---p 00000000 00:00 0 
+b3e15000-b3e63000 rw-p 00000000 00:00 0 
+b3e63000-b3e66000 ---p 00000000 00:00 0 
+b3e66000-b3ee4000 rw-p 00000000 00:00 0 
+b3ee4000-b3ee7000 ---p 00000000 00:00 0 
+b3ee7000-b3f35000 rw-p 00000000 00:00 0 
+b3f35000-b3f38000 ---p 00000000 00:00 0 
+b3f38000-b3f86000 rw-p 00000000 00:00 0 
+b3f86000-b3f89000 ---p 00000000 00:00 0 
+b3f89000-b3fd7000 rw-p 00000000 00:00 0 
+b3fd7000-b3fd8000 ---p 00000000 00:00 0 
+b3fd8000-b4058000 rw-p 00000000 00:00 0 
+b4058000-b41ef000 r--s 01a14000 08:01 421572     /usr/lib/jvm/java-6-openjdk/jre/lib/rt.jar
+b41ef000-b41f6000 rw-p 00000000 00:00 0 
+b41f6000-b4210000 rw-p 00000000 00:00 0 
+b4210000-b4216000 rw-p 00000000 00:00 0 
+b4216000-b42bb000 rw-p 00000000 00:00 0 
+b42bb000-b42be000 rw-p 00000000 00:00 0 
+b42be000-b4310000 rw-p 00000000 00:00 0 
+b4310000-b4316000 rw-p 00000000 00:00 0 
+b4316000-b43bb000 rw-p 00000000 00:00 0 
+b43bb000-b43c1000 rw-p 00000000 00:00 0 
+b43c1000-b43db000 rw-p 00000000 00:00 0 
+b43db000-b43e7000 rw-p 00000000 00:00 0 
+b43e7000-b4487000 rwxp 00000000 00:00 0 
+b4487000-b63e7000 rw-p 00000000 00:00 0 
+b63e7000-b6eca000 rw-p 00000000 00:00 0 
+b6eca000-b6f04000 rw-p 00000000 00:00 0 
+b6f11000-b6f23000 rw-p 00000000 00:00 0 
+b6f23000-b6fa0000 rw-p 00000000 00:00 0 
+b6fa0000-b6fa8000 rw-s 00000000 08:01 269572     /tmp/hsperfdata_ubuntu/1782
+b6fa8000-b6fe7000 r--p 00000000 08:01 269850     /usr/lib/locale/en_US.utf8/LC_CTYPE
+b6fe7000-b6fe8000 ---p 00000000 00:00 0 
+b6fe8000-b77ee000 rw-p 00000000 00:00 0 
+b77ee000-b77f1000 r--s 00020000 08:01 458350     /home/ubuntu/Downloads/omnet/omnetpp-4.4.1/contrib/jsimplemodule/jsimple/simkernel.jar
+b77f1000-b77f3000 r--s 0000f000 08:01 421031     /usr/lib/jvm/java-6-openjdk/jre/lib/ext/pulse-java.jar
+b77f3000-b77f4000 rw-p 00000000 00:00 0 
+b77f4000-b77f5000 r--p 00000000 00:00 0 
+b77f5000-b77f6000 rw-p 00000000 00:00 0 
+b77f6000-b77fd000 r--s 00000000 08:01 268524     /usr/lib/gconv/gconv-modules.cache
+b77fd000-b7801000 rw-p 00000000 00:00 0 
+bfdbd000-bfdc0000 ---p 00000000 00:00 0 
+bfdc0000-bfe0d000 rw-p 00000000 00:00 0          [stack]
+
+VM Arguments:
+jvm_args: -Djava.library.path=. 
+java_command: <unknown>
+Launcher Type: generic
+
+Environment Variables:
+CLASSPATH=/home/ubuntu/git/Hiwis/Hiwis/bin;/home/ubuntu/Downloads/omnet/omnetpp-4.4.1/contrib/jsimplemodule/jsimple/out/classes
+PATH=/home/ubuntu/Downloads/omnet/omnetpp-4.4.1/bin::/home/ubuntu/Downloads/omnet/omnetpp-4.4.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+USERNAME=ubuntu
+LD_LIBRARY_PATH=/home/ubuntu/Downloads/omnet/omnetpp-4.4.1/lib::/usr/lib/jvm/java-6-openjdk/jre/lib/i386/client:/usr/lib/jvm/java-6-openjdk/jre/lib/i386:
+SHELL=/bin/bash
+DISPLAY=:0.0
+DYLD_LIBRARY_PATH=/usr/lib/jvm/java-6-openjdk/jre/lib/i386/server
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0x48e7a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGBUS: [libjvm.so+0x48e7a0], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGFPE: [libjvm.so+0x399200], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGPIPE: [libjvm.so+0x399200], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGXFSZ: [libjvm.so+0x399200], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGILL: [libjvm.so+0x399200], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGUSR1: SIG_DFL, sa_mask[0]=0x00000000, sa_flags=0x00000000
+SIGUSR2: [libjvm.so+0x398c80], sa_mask[0]=0x00000004, sa_flags=0x10000004
+SIGHUP: [libjvm.so+0x39c280], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGINT: [libjvm.so+0x39c280], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGTERM: [libjvm.so+0x39c280], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+SIGQUIT: [libjvm.so+0x39c280], sa_mask[0]=0x7ffbfeff, sa_flags=0x10000004
+
+
+---------------  S Y S T E M  ---------------
+
+OS:Ubuntu 10.04 (lucid)
+uname:Linux 2.6.32-21-generic #32-Ubuntu SMP Fri Apr 16 08:10:02 UTC 2010 i686
+libc:glibc 2.11.1 NPTL 2.11.1 
+rlimit: STACK 8192k, CORE 0k, NPROC infinity, NOFILE 1024, AS infinity
+load average:0.69 0.92 0.97
+
+/proc/meminfo:
+MemTotal:        2061752 kB
+MemFree:         1158360 kB
+Buffers:           57208 kB
+Cached:           335776 kB
+SwapCached:            0 kB
+Active:           573128 kB
+Inactive:         277796 kB
+Active(anon):     462620 kB
+Inactive(anon):       16 kB
+Active(file):     110508 kB
+Inactive(file):   277780 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+HighTotal:       1187784 kB
+HighFree:         386136 kB
+LowTotal:         873968 kB
+LowFree:          772224 kB
+SwapTotal:        407544 kB
+SwapFree:         407544 kB
+Dirty:                56 kB
+Writeback:             0 kB
+AnonPages:        457936 kB
+Mapped:            82040 kB
+Shmem:              4700 kB
+Slab:              37556 kB
+SReclaimable:      29788 kB
+SUnreclaim:         7768 kB
+KernelStack:        2224 kB
+PageTables:         5128 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     1438420 kB
+Committed_AS:    1033400 kB
+VmallocTotal:     122880 kB
+VmallocUsed:       30964 kB
+VmallocChunk:      87112 kB
+HardwareCorrupted:     0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       4096 kB
+DirectMap4k:       12280 kB
+DirectMap4M:      897024 kB
+
+
+CPU:total 1 (2 cores per cpu, 2 threads per core) family 6 model 58 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, ht, tsc, tscinvbit, tscinv
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 58
+model name	: Intel(R) Core(TM) i3-3110M CPU @ 2.40GHz
+stepping	: 9
+cpu MHz		: 2470.471
+cache size	: 6144 KB
+fdiv_bug	: no
+hlt_bug		: no
+f00f_bug	: no
+coma_bug	: no
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 5
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 rdtscp constant_tsc up pni monitor ssse3
+bogomips	: 4940.94
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 2061752k(1158360k free), swap 407544k(407544k free)
+
+vm_info: OpenJDK Client VM (23.25-b01) for linux-x86 JRE (1.6.0_31-b31), built on Apr 17 2014 22:13:12 by "buildd" with gcc 4.4.3
+
+time: Wed Aug 20 05:51:53 2014
+elapsed time: 1 seconds
+
